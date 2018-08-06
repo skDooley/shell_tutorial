@@ -83,7 +83,7 @@ Desktop.
 
 To help us get started, we are going to download a bunch of files for the sake of this tutorial. We will talk more about this command later but for now copy and paste or type the command below exactly. This will download all of the files used in this tutorial from my public repository on github
 
-    git clone https://github.com/skDooley/Research/tutorials/shell
+    git clone https://github.com/skDooley/shell_tutorial.git
 
 ### Navigation
 
