@@ -33,10 +33,6 @@ of a computer or group of cumputers (cluster) by typing in recognized commands (
 to run programs instead of controlling what the computer does using a **g**raphical 
 **u**ser **i**nterface (GUI) with a mouse/keyboard combination.
 
-Use a browser to open the tutorial on github, located at:
-
-![https://github.com/skDooley/shell_tutorial/blob/master/README.md](https://github.com/skDooley/shell_tutorial/blob/master/README.md)
-
 A **terminal** is a program you run that gives you access to the
 shell. There are many different terminal programs that vary across
 operating systems. Today, if you are using Windows you will use the Putty terminal
