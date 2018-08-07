@@ -62,16 +62,23 @@ things are different. I recommend sticking with bash and learning it well.
 
 [Here is a link for more information](http://en.wikipedia.org/wiki/Bash_Unix_shell)
 
-To open a terminal, just single click on the "Terminal" icon on the
-Desktop.
+#Let's get started!
+Please open your terminal program. For those using Putty please fill in the relevant information like you see in Picture 1, for those using terminal see Picture 2. We are using a program called ssh (secured shell) to connect to a training computer that was set up for us to use.
 
-# The Command Line
+![puttyssh](images/putty.jpg) Picture 1
+
+![sshing](images/sshing.png) Picture 2
+
+Once you are connected let's run your first program. Type the words as you see below and press enter.
+
+    echo hello world
+
+You should see that the words hello world appeared on your screen. You just ran a program called echo.
 
 | Term | Definition | Example |
 |:-:|:-:|:-:|
 |  program | the name (case sensitive) of the program  | echo |
 |  arguement | additional information you give the program to get it to do what you want it to do.  | echo hello world |
-|  flag | a special kind of arguement that is proceeded by either 1 or 2 -'s  | ls -l / or just ls -l|
 
 ![CMD LINE](images/cmdLine.png)
 
@@ -95,6 +102,10 @@ directory. Directories are often called "folders" because of how they
 are represented in GUIs. Directories are just listings of files. They
 can contain other files or directories.
 
+| Term | Definition | Example |
+|:-:|:-:|:-:|
+|  flag | a special kind of arguement that is proceeded by either 1 or 2 -'s  | ls -l / or just ls -l|
+
 Whenever you start up a terminal, you will start in a special
 directory called the *home* directory. Every user has their own home
 directory where they have full access to do whatever they want.
@@ -106,20 +117,6 @@ or you could do ls -l to see details about the files|
 | cd | **c**hange **d**irectory | cd shell |
 
 
-
-
-
-# Let's get started
-
-One very basic command is `echo`. This command just prints text to
-the terminal. Try the command:
-
-    echo Hello, World
-
-Then press enter. You should see the text "Hello, World" printed back
-to you. The echo command is useful for printing from a shell script,
-for displaying variables, and for generating known values to pass
-to other programs.
 
 ## Moving around the file system
 
