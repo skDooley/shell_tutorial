@@ -242,8 +242,6 @@ between these two things.
 
 
 
-
-
 * * * *
 **Short Exercise**
 
@@ -707,7 +705,16 @@ All this command line stuff is great, but sometimes I just want to use Excel or 
 
 ![Cyberduck](images/cyberduck.png)
 
+![Winscp](images/winscp1.gif)
 
+Now that you're connected let's change the defualts to add our editor of choice.
+
+![Cyberduck](images/cybereditor.png)
+
+* * * *
+
+# Cheat sheet
+!(cheat sheet)(ShellCheatSheet.pdf)
 
 
 ### Exercise solutions have been posted as an ipython notebook.
