@@ -197,6 +197,10 @@ We can now navigate *pwd, ls, cd* so now let's talk about how we create new file
     
 Turn to the person next to you, your battle-buddy, and explain why the last command in the list of commands didn't work. What are 2 ways that we have discussed to remove the directory and its contents?
 
+** DANGER WILL ROBINSON!!!!
+The rm -r is EXTREMELY powerful!!!!
+
+![RussianRLT](images/computerroulet.jpg)
 
 
 ## Saving time with shortcuts, wild cards, and tab completion
@@ -235,6 +239,10 @@ by spaces. In other words, the two commands:
 
 are identical. The `ls` command cannot tell the difference
 between these two things.
+
+
+
+
 
 * * * *
 **Short Exercise**
@@ -584,111 +592,6 @@ learn to become proficient with the pipe and redirection operators:
 `|`, `>`, `>>`.
 
 
-**A sorting example**
-
-Let's create a file with some words to sort for the next example. We
-want to create a file which contains the following names:
-
-    Bob
-    Alice
-    Diane
-    Charles
-
-To do this, we need a program which allows us to create text
-files. There are many such programs, the easiest one which is
-installed on almost all systems is called `nano`. Navigate to `/tmp`
-and enter the following command:
-
-    nano toBeSorted
-
-Now enter the four names as shown above. When you are done, press
-CONTROL+O to write out the file. Press enter to use the file name
-`toBeSorted`. Then press CONTROL+x to exit `nano`.
-
-When you are back to the command line, enter the command:
-
-    sort toBeSorted
-
-Notice that the names are now printed in alphabetical order.
-
-* * * *
-**Short Exercise**
-
-Use the `echo` command and the append operator, `>>`, to append your
-name to the file, then sort it and make a new file called Sorted.
-
-* * * *
-
-Let's navigate back to `~/softwarecarpentry/day1.shell/data`. Enter the following command:
-
-    wc Bert/* | sort -k 3 -n
-
-We are already familiar with what the first of these two commands
-does: it creates a list containing the number of characters, words,
-and lines in each file in the `Bert` directory. This list is then
-piped into the `sort` command, so that it can be sorted. Notice there
-are two options given to sort:
-
-1.  `-k 3`: Sort based on the third column
-2.  `-n`: Sort in numerical order as opposed to alphabetical order
-
-Notice that the files are sorted by the number of characters.
-
-* * * *
-**Short Exercise**
-
-Use the `man` command to find out how to sort the output from `wc` in
-reverse order.
-
-* * * *
-
-* * * *
-**Short Exercise**
-
-Combine the `wc`, `sort`, `head` and `tail` commands so that only the
-`wc` information for the largest file is listed
-
-Hint: To print the smallest file, use:
-
-    wc Bert/* | sort -k 3 -n | head -n 1
-
-* * * *
-
-Printing the smallest file seems pretty useful. We don't want to type
-out that long command often. Let's create a simple script, a simple
-program, to run this command. The program will look at all of the
-files in the current directory and print the information about the
-smallest one. Let's call the script `smallest`. We'll use `nano` to
-create this file. Navigate to the `data` directory, then:
-
-    nano smallest
-
-Then enter the following text:
-
-    #!/bin/bash
-    wc * | sort -k 3 -n | head -n 1
-
-Now, `cd` into the `Bert` directory and enter the command
-`../smallest`. Notice that it says permission denied. This happens
-because we haven't told the shell that this is an executable
-file. If you do `ls -l ../smallest`, it will show you the permissions on
-the left of the listing.
-
-Enter the following commands:
-
-    chmod a+x ../smallest
-    ../smallest
-
-The `chmod` command is used to modify the permissions of a file. This
-particular command modifies the file `../smallest` by giving all users
-(notice the `a`) permission to execute (notice the `x`) the file. If
-you enter:
-
-    ls -l ../smallest
-
-You will see that the file name is green and the permissions have changed.
-Congratulations, you just created your first shell script!
-
 # Searching files
 
 You can search the contents of a file using the command `grep`. The
@@ -700,17 +603,6 @@ discriminated. Lets list all of the ranges from the tests that Bert
 conducted:
 
     grep Range *
-
-* * * *
-**Short Exercise**
-
-Create an executable script called `smallestrange` in the `data`
-directory, that is similar to the `smallest` script, but prints the
-file containing the file with the smallest Range. Use the commands
-`grep`, `sort`, and `tail` to do this.
-
-* * * *
-
 
 # Finding files
 
@@ -770,29 +662,60 @@ require a `find` command):
 Hint: If you make a mistake and need to start over just do the
 following:
 
-1.  Navigate to the `day1.shell` directory
+1.  Navigate to the `data` directory
 
-2.  Delete the `data` directory
+2.  Delete the `hearing_data` directory
 
-3.  Enter the command: `git checkout -- data` You should see that the
-    data directory has reappeared in its original state
-
-**BONUS**
-
-Redo exercise 4, except rename only the files which do not already end
-in `.txt`. You will have to use the `man` command to figure out how to
-search for files which do not match a certain name.
+3.  Enter the command: `git checkout -- hearing_data` You should see that the
+    hearing_data directory has reappeared in its original state
 
 * * * *
+
+# REAL DATA
+
+Now let's play with some real data and get the hang of Linux.
+
+    cd ~/shell_tutorial/fastas
+
+** Short Excercise **
+This Directory contains a fasta file called DiverseCas9s.faa. Talk to your battle buddy and answer the following questions:
+
+1. How many sequences are in the fasta file?
+2. Why might it be usefull to know how many sequences were in a fasta file?
+2. Discuss how you would create a file with all of the ids in the fasta file. Create that file and call it Cas9IDs.txt
+
+* * * *
+
+Now let's do some bioinformatics. In the file query.faa is a protein we suspect is a Cas9. We will use blast on the command line to explore and see which of the DiverseCas9s this is closest to. To do this make sure you have blast installed. 
+
+    conda install -c bioconda blast
+    
+To start out we have to make a blast database.
+
+    makeblastdb -in DiverseCas9s.faa -dbtype prot -out DiverseCas9s.faa
+    ls
+    
+Now BLAST is ready to do it's job. Let's run the BLAST!
+ 
+    blasp -h
+    blastp -db DiverseCas9s.faa -query query.faa -out MysteryCas9.blastresults -outfmt 6
+    less -S MysteryCas9.blastresults
+    
+# GUIs - YAY!!
+    
+All this command line stuff is great, but sometimes I just want to use Excel or Jump or some other program. Time for WinSCP and Cyberduck.
+
+![Cyberduck](images/cyberduck.png)
+
+
+
 
 ### Exercise solutions have been posted as an ipython notebook.
 
 You can view [solutions here](https://nbviewer.jupyter.org/github/germs-lab/softwarecarpentry/blob/master/day1.shell/exercise_solutions.ipynb)
 
 
-## Bonus:
-
-**backtick, xargs**: Example find all files with certain text
+## **Bonus**
 
 **alias** -> rm -i
 
@@ -802,12 +725,13 @@ You can view [solutions here](https://nbviewer.jupyter.org/github/germs-lab/soft
 
 **du**
 
-**ln**
-
 **ssh and scp**
 
 **Regular Expressions**
 
 **Permissions**
 
-**Chaining commands together**
+**ln**
+
+
+# Thanks for joining us! For other P3 bootcamp tutorials please see [https://github.com/pommevilla/p3.bootcamp.2018]
