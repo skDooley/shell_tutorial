@@ -67,11 +67,9 @@ Please open your terminal program. For those using Putty please fill in the rele
 for those using terminal see Picture 2. We are using a program called ssh (secured shell) to connect to a training computer
 that was set up for us to use.
 
-![puttyssh](images/putty.jpg) 
-Picture 1
+![Picture 1](images/puttyssh.png) 
 
-![sshing](images/sshing.png) 
-Picture 2
+![Picture 2](images/sshing.png) 
 
 Once you are connected let's run your first program. Type the words as you see below and press enter.
 
