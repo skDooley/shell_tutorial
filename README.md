@@ -62,12 +62,16 @@ things are different. I recommend sticking with bash and learning it well.
 
 [Here is a link for more information](http://en.wikipedia.org/wiki/Bash_Unix_shell)
 
-#Let's get started!
-Please open your terminal program. For those using Putty please fill in the relevant information like you see in Picture 1, for those using terminal see Picture 2. We are using a program called ssh (secured shell) to connect to a training computer that was set up for us to use.
+# Let's get started!
+Please open your terminal program. For those using Putty please fill in the relevant information like you see in Picture 1,
+for those using terminal see Picture 2. We are using a program called ssh (secured shell) to connect to a training computer
+that was set up for us to use.
 
-![puttyssh](images/putty.jpg) Picture 1
+![puttyssh](images/putty.jpg) 
+Picture 1
 
-![sshing](images/sshing.png) Picture 2
+![sshing](images/sshing.png) 
+Picture 2
 
 Once you are connected let's run your first program. Type the words as you see below and press enter.
 
@@ -84,145 +88,115 @@ You should see that the words hello world appeared on your screen. You just ran 
 
 # Basic essential programs
 
-To help us get started, we are going to download a bunch of files for the sake of this tutorial. We will talk more about this command later but for now copy and paste or type the command below exactly. This will download all of the files used in this tutorial from my public repository on github
+To help us get started, we are going to download a bunch of files for the sake of this tutorial. We will talk more about
+this command later but for now copy and paste or type the command below exactly. This will download all of the files used
+in this tutorial from my public repository on github
 
     git clone https://github.com/skDooley/shell_tutorial.git
 
-### Navigation
+## Navigation
 
-Let's learn how to move around the file system using command line
-programs. This is really easy to do using a GUI (just click on
-things). Once you learn the basic commands, you'll see that it is
-really easy to do in the shell too.
+Let's learn how to move around the file system using command line programs. This is really easy to do using a GUI (just
+click on things). Once you learn the basic commands, you'll see that it is really easy to do in the shell too.
 
-First we have to know where we are. The program `pwd` (print working
-directory) tells you where you are sitting in the directory tree. The
-command `ls` will list the files in files in the current
-directory. Directories are often called "folders" because of how they
-are represented in GUIs. Directories are just listings of files. They
-can contain other files or directories.
+#### Where am I?
+First we have to know where we are. The program `pwd` (print working directory) tells you where you are sitting in the
+directory tree. Whenever you start up a terminal, you will start in a special directory called the *home* directory. Every
+user has their own home directory where they have full access to do whatever they want.
+
+#### What files and folders are available where I am at and how do I access them?
+The command `ls` will list the files in files in the current directory. Directories are often called "folders" because of
+how they are represented in GUIs. Directories are just listings of files. They can contain other files or directories.
+
+To see files in a different directory, just add the directory you want to see as an arguement. To see what is in the shell_tutorial folder we downloaded with our git clone command type:
+
+    ls shell_tutorial
+
+Now, there are a few things you need to know in order to be able to navigate. The first is that everything on a file system is under what we call the root directory. When we navigate every directory is separated by a / so the root is only 1 slash. Let's go to that directory now. To change directories we will use the program cd.
+
+    cd /
+    pwd
+
+Now do an ls to see what is there. If you remember, when you first logged in you were in /home/<username>. Your ls shows you that under the root directory is the folder home. Let's get back to our directory and our test data!
+    
+* * * *
+
+#### Short Exercise
+
+SE1. Navigate to the shell_tutorial folder in your home directory
+
+* * * *
+
+#### Relative vs. Absolute path
+
+Where you are in the directory tree is called your path. Lots of programs require you to pass a file as an arguement. If you are in your home directory and the file you want to pass to the program is not in the same directory, you can either use what's called the absolute path eg. /home/<username>/shell_tutorial/TestFile.txt or you can use the relative path eg. shell_tutorial/TestFile.txt. These are equivalent because of where you are in the tree.
+    
+The writers of shell also included a few shortcut keys. Sometimes we are in a directory and we want to go to the directories parent. we can do that using ..
+
+    cd ..
+    pwd
+    
+This will put us 1 directory above where we were (ie back in our home directory). If we want to go 2 directories above where we are now:
+
+    cd ../../
+    pwd
+    
+Two periods is 1 directory above where you are at, 1 period is your current directory. So from your home directory this pattern ./../././.. is /home/username, /home, /home, /home, /. We were in the home directory, we navigated 2 directories up so now we are in the root directory. The next tip/trick I want to show you is how to go back to the directory you were just in without having to type in the relative or absolute path. To do that:
+
+    cd -
+    pwd
+
+This will put you in the last directory you were in. You can run this command over and over to flip-flop what directory you are in, very usefull when you are working on a project were you have a few different folders you are working with.
+
+Okay time to learn a new importan term:
 
 | Term | Definition | Example |
 |:-:|:-:|:-:|
-|  flag | a special kind of arguement that is proceeded by either 1 or 2 -'s  | ls -l / or just ls -l|
+|  flag | a special kind of arguement that is proceeded by either 1 or 2 -'s  | ls -l |
 
-Whenever you start up a terminal, you will start in a special
-directory called the *home* directory. Every user has their own home
-directory where they have full access to do whatever they want.
+So now navigate to your shell_tutorial folder and try the ls -l. 
 
-| Program | Description | Example |
-| pwd | **p**rint **w**orking **d**irectory | pwd |
-| ls | list the files in the working directory | ls 
-or you could do ls -l to see details about the files|
-| cd | **c**hange **d**irectory | cd shell |
+    ls -l
 
+![flags](images/flags.png) 
+Picture 3
 
-
-## Moving around the file system
-
-Let's learn how to move around the file system using command line
-programs. This is really easy to do using a GUI (just click on
-things). Once you learn the basic commands, you'll see that it is
-really easy to do in the shell too.
-
-First we have to know where we are. The program `pwd` (print working
-directory) tells you where you are sitting in the directory tree. The
-command `ls` will list the files in files in the current
-directory. Directories are often called "folders" because of how they
-are represented in GUIs. Directories are just listings of files. They
-can contain other files or directories.
-
-Whenever you start up a terminal, you will start in a special
-directory called the *home* directory. Every user has their own home
-directory where they have full access to do whatever they want.
-
-**File Types**
-
-When you enter the `ls` command lists the contents of the current
-directory. There are several items in the home directory, notice that
-some of them are files and some of them are directories.
-
-Lets create an empty file using the `touch` command. Enter the
-command:
-
-    touch testfile
-
-Then list the contents of the directory again. You should see that a
-new entry, called `testfile`, exists.  The `touch` command just
-creates an empty file.
-
-Some terminals will color the directory entries in this very
-convenient way. Another way you can display direcories is by using `ls -F` instead of `ls`. The
-`-F` argument modifies the results so that a slash is placed at the
-end of directories. If the file is *executable* meaning that it can be
-run like a program, then a star will be placed at the end of of the
-file name.
-
-You can also use the command `ls -l` to see whether items in a
-directory are files or directories. `ls -l` gives a lot more
-information too, such as the size of the file and information about
-the owner. If the entry is a directory, then the first letter will be
-a "d". The fifth column shows you the size of the entries in
-bytes. Notice that `testfile` has a size of zero.
-
-Now, let's get rid of `testfile`. To remove a file, just enter the
-command:
-
-    rm testfile
-
-The `rm` command can be used to remove files. If you enter `ls` again,
-you will see that `testfile` is gone.
-
-**Changing Directories**
-
-Now, let's move to a different directory.  Right now, we are in the "day1.shell" directory which is in the "softwarecarpentry" directory.  You can see this with the command `pwd`.   The command `cd` (change
-directory) is used to move around. Let's move into the `~/softwarecarpentry`
-directory. Enter the following command:
-
-    cd ~/softwarecarpentry
-
-Now use the `ls` command to see what is inside this directory.
-This directory contains all of the material for this boot camp. Now
-move to the directory containing the data for the shell tutorial:
-
-    cd day1.shell
-
-If you enter the `cd` command by itself, you will return to the home
-directory. Try this, and then navigate back to the `shell`
-directory.
-
-## Arguments
-
-Most programs take additional arguments that control their exact
-behavior. For example, `-F` and `-l` are arguments to `ls`.  The `ls`
-program, like many programs, take a lot of arguments. But how do we
-know what the options are to particular commands?
-
-Most commonly used shell programs have a manual. You can access the
-manual using the `man` program. Try entering:
+To see what flags are available use the program "man" with the arguement being the name of the program.
 
     man ls
+    
+To quit the man page press q. Programs that are run from the shell can get extremely complicated. To see an example, open up the manual page for the `find` program, which we will use later this session. No one can possibly learn all of these arguments, of course. So you will probably find yourself referring back to the manual page frequently.
 
-This will open the manual page for `ls`. Use the space key to go
-forward and b to go backwards, j and k will move you one line up and down, respectively. When you are done reading, just hit `q`
-to exit.
 
-Programs that are run from the shell can get extremely complicated. To
-see an example, open up the manual page for the `find` program,
-which we will use later this session. No one can possibly learn all of
-these arguments, of course. So you will probably find yourself
-referring back to the manual page frequently.
+* * * *
 
-**Examining the contents of other directories**
+#### Short Exercise
 
-By default, the `ls` commands lists the contents of the working
-directory (i.e. the directory you are in). You can always find the
-directory you are in using the `pwd` command. However, you can also
-give `ls` the names of other directories to view. Navigate to the
-home directory if you are not already there. Then enter the
-command:
+SE2. Using what you have learned, use man to find out what flags to add as arguements to list files and folders in the root directory by date. What is the newest file/folder? What is the oldest?
 
-    ls ~ubuntu/softwarecarpentry
+* * * *
+
+
+#### Creation/Destruction
+
+We can now navigate *pwd, ls, cd* so now let's talk about how we create new files or folders/directories and how we delete them.
+
+| Command | Description |
+|:-:|:-:|
+|mkdir| makes a directory|
+|rmdir| removes an empty directory|
+|touch <nameOfFile>| creates an file|
+|rm <nameOfFile> | removes a file|
+|rm -r <directory> | removes an entire directory and all of its contents|
+  
+    mkdir testdir
+    cd testdir
+    touch testfile.txt
+    cd -
+    rm testdir
+    
+Turn to the person next to you, your battle-buddy, and explain why the last command in the list of commands didn't work. What are 2 ways that we have discussed to remove the directory and its contents?
+
 
 
 ## Saving time with shortcuts, wild cards, and tab completion
@@ -231,21 +205,12 @@ command:
 
 There are some shortcuts which you should know about. Dealing with the
 home directory is very common. So, in the shell the tilde character,
-`~`, is a shortcut for your home directory. Navigate to the `day1.shell`
+`~`, is a shortcut for your home directory. Navigate to the `shell_tutorial`
 directory, then enter the command:
 
     ls ~
 
-This prints the contents of your home directory, without you having to
-type the full path. The shortcut `..` always refers to the directory
-above your current directory. Thus:
 
-    ls ..
-
-prints the contents of the `/home/ubuntu/softwarecarpentry`. You can chain
-these together, so:
-
-    ls ../../
 
 prints the contents of `/home/ubuntu` which is your home
 directory. Finally, the special directory `.` always refers to your
