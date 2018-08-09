@@ -676,6 +676,7 @@ Now let's play with some real data and get the hang of Linux.
     cd ~/shell_tutorial/fastas
 
 ** Short Excercise **
+
 This Directory contains a fasta file called DiverseCas9s.faa. Talk to your battle buddy and answer the following questions:
 
 1. How many sequences are in the fasta file?
@@ -684,7 +685,7 @@ This Directory contains a fasta file called DiverseCas9s.faa. Talk to your battl
 
 * * * *
 
-Now let's do some bioinformatics. In the file query.faa is a protein we suspect is a Cas9. We will use blast on the command line to explore and see which of the DiverseCas9s this is closest to. To do this make sure you have blast installed. 
+Now let's do some bioinformatics. In the file query.faa is a protein we suspect is a Cas9. We will use BLAST on the command line to explore and see which of the DiverseCas9s this is closest to. To do this make sure you have blast installed. 
 
     conda install -c bioconda blast
     
@@ -714,7 +715,7 @@ Now that you're connected let's change the defualts to add our editor of choice.
 * * * *
 
 # Cheat sheet
-!(cheat sheet)(ShellCheatSheet.pdf)
+![Here is a nice cheat sheet](ShellCheatSheet.pdf)
 
 
 ### Exercise solutions have been posted as an ipython notebook.
