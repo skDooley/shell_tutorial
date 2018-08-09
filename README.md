@@ -742,4 +742,4 @@ You can view [solutions here](https://nbviewer.jupyter.org/github/germs-lab/soft
 **ln**
 
 
-# Thanks for joining us! For other P3 bootcamp tutorials please see [https://github.com/pommevilla/p3.bootcamp.2018]
+# Thanks for joining us! For other P3 bootcamp tutorials please see ![P3](https://github.com/pommevilla/p3.bootcamp.2018)
