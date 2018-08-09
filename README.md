@@ -161,11 +161,11 @@ So now navigate to your shell_tutorial folder and try the ls -l.
 ![flags](images/flags.png) 
 Picture 3
 
-To see what flags are available use the program "man" with the arguement being the name of the program.
+To see what flags are available use the program "man" with the arguement being the name of the program. Use "space" to go forward and hit the "b" key to go backwards. The "g" key goes to the beginning of the file and "shift" + "g" goes to the end. Finally, hit "q" to quit.
 
     man ls
     
-To quit the man page press q. Programs that are run from the shell can get extremely complicated. To see an example, open up the manual page for the `find` program, which we will use later this session. No one can possibly learn all of these arguments, of course. So you will probably find yourself referring back to the manual page frequently.
+Programs that are run from the shell can get extremely complicated. To see an example, open up the manual page for the `find` program, which we will use later this session. No one can possibly learn all of these arguments, of course. So you will probably find yourself referring back to the manual page frequently.
 
 
 * * * *
@@ -188,6 +188,8 @@ We can now navigate *pwd, ls, cd* so now let's talk about how we create new file
 |touch <nameOfFile>| creates an file|
 |rm <nameOfFile> | removes a file|
 |rm -r <directory> | removes an entire directory and all of its contents|
+|cp <filename> <destination>| copy a file to a location|
+|mv <filename> <destination>| moves a file to a location|
   
     mkdir testdir
     cd testdir
@@ -201,7 +203,7 @@ Turn to the person next to you, your battle-buddy, and explain why the last comm
 
 ## Saving time with shortcuts, wild cards, and tab completion
 
-**Shortcuts**
+**Tilde ~**
 
 There are some shortcuts which you should know about. Dealing with the
 home directory is very common. So, in the shell the tilde character,
@@ -209,65 +211,10 @@ home directory is very common. So, in the shell the tilde character,
 directory, then enter the command:
 
     ls ~
+   
+**Wild card**
 
-
-
-prints the contents of `/home/ubuntu` which is your home
-directory. Finally, the special directory `.` always refers to your
-current directory. So, `ls`, `ls .`, and `ls ././././.` all do the
-same thing, they print the contents of the current directory. This may
-seem like a useless shortcut right now, but we'll see when it is
-needed in a little while.
-
-To summarize, the commands `ls ~`, `ls ~/.`, and `ls ../../` all do exactly the same thing. These shortcuts are not
-necessary, they are provided for your convenience.
-
-**Our data set: Cochlear Implants**
-
-A cochlear implant is a small electronic device that is surgically
-implanted in the inner ear to give deaf people a sense of
-hearing. More than a quarter of a million people have them, but there
-is still no widely-accepted benchmark to measure their effectiveness.
-In order to establish a baseline for such a benchmark, our supervisor
-got teenagers with CIs to listen to audio files on their computer and
-report:
-
-1.  the quietest sound they could hear
-2.  the lowest and highest tones they could hear
-3.  the narrowest range of frequencies they could discriminate
-
-To participate, subjects attended our laboratory and one of our lab
-techs played an audio sample, and recorded their data - when they
-first heard the sound, or first heard a difference in the sound.  Each
-set of test results were written out to a text file, one set per file.
-Each participant has a unique subject ID, and a made-up subject name.
-Each experiment has a unique experiment ID. The experiment has
-collected 351 files so far.
-
-The data is a bit of a mess! There are inconsistent file names, there
-are extraneous "NOTES" files that we'd like to get rid of, and the
-data is spread across many directories. We are going to use shell
-commands to get this data into shape. By the end we would like to:
-
-1.  Put all of the data into one directory called "alldata"
-
-2.  Have all of the data files in there, and ensure that every file
-    has a ".txt" extension
-
-3.  Get rid of the extraneous "NOTES" files
-
-If we can get through this example in the available time, we will move
-onto more advanced shell topics...
-
-**Wild cards**
-
-Navigate to the `~/softwarecarpentry/day1.shell/data/THOMAS` directory. This
-directory contains our hearing test data for THOMAS. If we type `ls`,
-we will see that there are a bunch of files which are just four digit
-numbers. By default, `ls` lists all of the files in a given
-directory. The `*` character is a shortcut for "everything". Thus, if
-you enter `ls *`, you will see all of the contents of a given
-directory. Now try this command:
+Navigate to the `~/shell_tutorial/hearing_data/data/THOMAS` directory. If we type `ls`, we will see that there are a bunch of files which are just four digit numbers. By default, `ls` lists all of the files in a given directory. The `*` character is a shortcut for "everything". Thus, if you enter `ls *`, you will see all of the contents of a given directory. Now try this command:
 
     ls *1
 
@@ -297,7 +244,7 @@ between these two things.
 Do each of the following using a single `ls` command without
 navigating to a different directory.
 
-1.  List all of the files in the data directory `gerdal` that contain the number `2`
+1.  List all of the files in the data directory `~/shell_tutorial/data/hearing_data/gerdal` that contain the number `2`
 2.  List all of the files in that contain the number `2`, followed by the number (in any position) `9`
 
 * * * *
@@ -312,9 +259,9 @@ directory name. For example, enter:
     cd s<tab>
 
 The shell will fill in the rest of the directory name for
-`softwarecarpentry`. Now enter:
+`shell_tutorial`. Now enter:
 
-    ls ~/softwarecarpentry/day1.shell/ex<tab><tab>
+    ls ~/shell_tutorial/data/ex<tab><tab>
 
 When you hit the first tab, nothing happens. The reason is that there
 are multiple directories in the home directory which start with
@@ -330,12 +277,11 @@ will see that tab completion works.
 
 You can easily access previous commands.  Hit the up arrow.  
 Hit it again.  You can step backwards through your command history.
-The down arrow takes your forwards in the command history.  
+The down arrow takes you forward in the command history.  
 
 ^-C will cancel the command you are writing, and give you a fresh prompt.
 
-^-R will do a reverse-search through your command history.  This
-is very useful.
+    history
 
 ## Which program? ##
 
@@ -371,14 +317,14 @@ shell looks for programs to run. If your program is not in this list,
 then an error is printed. The shell ONLY checks in the places listed
 in the `PATH` environment variable.
 
-Navigate to the `day1.shell` directory and list the contents. You will
+Navigate to the `~/shell_tutorial/data` directory and list the contents. You will
 notice that there is a program (executable file) called `hello` in
 this directory. Now, try to run the program by entering:
 
     hello
 
 You should get an error saying that hello cannot be found. That is
-because the directory `~ubuntu/softwarecarpentry/day1.shell` is not in the
+because the directory `~/shell_tutorial/data` is not in the
 `PATH`. You can run the `hello` program by entering:
 
     ./hello
@@ -388,17 +334,22 @@ directory. This tells the shell to run the `hello` program which is
 located right here. So, you can run any program by entering the path
 to that program. You can run `hello` equally well by specifying:
 
-    /ubuntu/softwarecarpentry/day1.shell/hello
+    /home/username/shell_tutorial/data/hello
 
 Or by entering:
 
-    ../day1.shell/hello
+    data/hello
 
 When there are no `/` characters, the shell assumes you want to look
 in one of the default places for the program.
 
+* * * *
 
-## Examining Files
+Take a short 5 minute break, you earned it!
+
+* * * *
+
+# Examining Files on the command line
 
 We now know how to switch directories, run programs, and look at the
 contents of directories, but how do we look at the contents of files?
@@ -417,14 +368,15 @@ takes a list of file names and writes them out one after another (this
 is where the name comes from, `cat` is short for concatenate).
 
 * * * *
+
 **Short Exercises**
 
-1.  Print out the contents of the `~/softwarecarpentry/day1.shell/dictionary.txt`
+1.  Print out the contents of the `dictionary.txt`
     file. What does this file contain?
 
-2.  Without changing directories, (you should still be in `day1.shell`),
+2.  *Without changing directories*, (you should still be in `/home/<username>/shell_tutorial/data`),
     use one short command to print the contents of all of the files in
-    the `/ubuntu/softwarecarpentry/day1.shell/data/THOMAS` directory.
+    the `hearing_data/THOMAS/` directory.
 
 * * * *
 
@@ -432,7 +384,7 @@ is where the name comes from, `cat` is short for concatenate).
 be annoying to use. The program, `less`, is useful for this
 case. Enter the following command:
 
-    less ~/softwarecarpentry/day1.shell/dictionary.txt
+    less dictionary.txt
 
 `less` opens the file, and lets you navigate through it. The commands
 are identical to the `man` program. Use "space" to go forward and hit
@@ -456,9 +408,9 @@ documentation using "/" as well!
 ## Redirection
 
 Let's turn to the experimental data from the hearing tests that we
-began with. This data is located in the `~/softwarecarpentry/day1.shell/data`
+began with. This data is located in the `~/shell_turorial/data/hearing_data`
 directory. Each subdirectory corresponds to a particular participant
-in the study. Navigate to the `Bert` subdirectory in `data`.  There
+in our fake study. Navigate to the `Bert` subdirectory in `data`.  There
 are a bunch of text files which contain experimental data
 results. Lets print them all:
 
@@ -466,7 +418,7 @@ results. Lets print them all:
 
 Now enter the following command:
 
-    cat au* > ../all_data
+    cat au* > ../all_data.txt
 
 This tells the shell to take the output from the `cat au*` command and
 dump it into a new file called `../all_data`. To verify that this
@@ -480,34 +432,31 @@ exists.
 * * * *
 **Short Exercise**
 
-Use `>>`, to append the contents of all of the files which contain the
-number 4 in the directory:
+Use `>>`, to append the contents of all of the files which contain the number 4 in the directory:
 
-    ~/softwarecarpentry/day1.shell/data/gerdal
+    ~/shell_turorial/data/hearing_data/gerdal
 
-to the existing `all_data` file. Thus, when you are done `all_data`
-should contain all of the experiment data from Bert and any
-experimental data file from gerdal that contains the number 4.
+to the existing `all_data.txt` file. Thus, when you are done `all_data.txt` should contain all of the experiment data from Bert and any experimental data file from gerdal that contains the number 4.
 
 * * * *
 
 
-## Creating, moving, copying, and removing
+## Practice Creating, moving, copying, and removing
 
-We've created a file called `all_data` using the redirection operator
+We've created a file called `all_data.txt` using the redirection operator
 `>`. This file is critical - it's our analysis results - so we want to
 make copies so that the data is backed up.
 Lets copy the file using the `cp` command. The `cp`
 command backs up the file. Navigate to the `data` directory and enter:
 
-    cp all_data all_data_backup
+    cp all_data.txt all_data_backup.txt
 
-Now `all_data_backup` has been created as a copy of `all_data`. We can
+Now `all_data_backup` has been created as a copy of `all_data.txt`. We can
 move files around using the command `mv`. Enter this command:
 
-    mv all_data_backup /tmp/
+    mv all_data_backup.txt /tmp/
 
-This moves `all_data_backup` into the directory `/tmp`. The directory
+This moves `all_data_backup.txt` into the directory `/tmp`. The directory
 `/tmp` is a special directory that all users can write to. It is a
 temporary place for storing files. Data stored in `/tmp` is
 automatically deleted when the computer shuts down.
@@ -515,31 +464,26 @@ automatically deleted when the computer shuts down.
 The `mv` command is also how you rename files. Since this file is so
 important, let's rename it:
 
-    mv all_data all_data_IMPORTANT
+    mv all_data.txt all_data_IMPORTANT.txt
 
-Now the file name has been changed to all_data_IMPORTANT. Let's delete
+Now the file name has been changed to all_data_IMPORTANT.txt. Let's delete
 the backup file now:
 
-    rm /tmp/all_data_backup
+    rm /tmp/all_data_backup.txt
 
-The `mkdir` command is used to create a directory. Just enter `mkdir`
-followed by a space, then the directory name.
+
 
 * * * *
 **Short Exercise**
 
 Do the following:
 
-1.  Rename the `all_data_IMPORTANT` file to `all_data`.
+1.  Rename the `all_data_IMPORTANT.txt` file to `all_data.txt`.
 2.  Create a directory in the `data` directory called `foo`
-3.  Then, copy the `all_data` file into `foo`
+3.  Then, copy the `all_data.txt` file into `foo`
+4.  Delete foo and all of its contents
 
 * * * *
-
-By default, `rm`, will NOT delete directories. You can tell `rm` to
-delete a directory using the `-r` option. Enter the following command:
-
-    rm -r foo
 
 
 ## Count the words
@@ -557,15 +501,15 @@ indicated. The final line contains this information summed over all of
 the files. Thus, there were 10445 characters in total.
 
 Remember that the `Bert/*` and `gerdal/*4*` files were merged
-into the `all_data` file. So, we should see that `all_data` contains
+into the `all_data` file. So, we should see that `all_data.txt` contains
 the same number of characters:
 
-    wc all_data
+    wc all_data.txt
 
 Every character in the file takes up one byte of disk space. Thus, the
 size of the file in bytes should also be 10445. Let's confirm this:
 
-    ls -l all_data
+    ls -l all_data.txt
 
 Remember that `ls -l` prints out detailed information about a file and
 that the fifth column is the size of the file in bytes.
@@ -577,7 +521,7 @@ Suppose I wanted to only see the total number of character, words, and
 lines across the files `Bert/*` and `gerdal/*4*`. I don't want to
 see the individual counts, just the total. Of course, I could just do:
 
-    wc all_data
+    wc all_data.txt
 
 Since this file is a concatenation of the smaller files. Sure, this
 works, but I had to create the `all_data` file to do this. Thus, I
@@ -587,15 +531,15 @@ more commands: `head` and `tail`. These commands print the first few,
 or last few, lines of a file, respectively. Try them out on
 `all_data`:
 
-    head all_data
-    tail all_data
+    head all_data.txt
+    tail all_data.txt
 
 The `-n` option to either of these commands can be used to print the
 first or last `n` lines of a file. To print the first/last line of the
 file use:
 
-    head -n 1 all_data
-    tail -n 1 all_data
+    head -n 1 all_data.txt
+    tail -n 1 all_data.txt
 
 Let's turn back to the problem of printing only the total number of
 lines in a set of files without creating any temporary files. To do
