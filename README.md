@@ -1,6 +1,6 @@
-# The Shell
+# Basic Linux Tutoral
 
-![the Shell](images/MatrixBash.jpg)
+![Basic Linux Tutoral](images/MatrixBash.jpg)
 
 **Original Material by Milad Fatenejad, Sasha Wood, and Radhika Khetani**
 **Modified by Jared Flater and Adina Howe**
